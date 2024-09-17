@@ -3,8 +3,8 @@
 }
 
 body {
-  background: url(image/bgImage.jpg);
-  background-size: 100%;
+  background: url("https://cdn.dribbble.com/users/28455/screenshots/1389791/weather.gif");
+  background-size: 100% 100vh;
   background-repeat: no-repeat;
   font-size: 20px !important;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -21,6 +21,7 @@ body {
 .label {
   font-size: 20px;
 }
+
 #input {
   padding: 15px;
   border-radius: 15px;

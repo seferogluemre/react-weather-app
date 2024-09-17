@@ -1,35 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import fetchData from "./fetchData";
 
 function App() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [inputValue, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState(null);
+  // const apiKey = `10dce54d3ebb7918252869cf5ca2da5c`;
 
-  const apiKey = "ca289ef8be4db0b41bda25fdcf4b6232";
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}&units=metric`;
+  const { data, error } = fetchData(
+    `http://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=10dce54d3ebb7918252869cf5ca2da5c`
+  );
+
+  console.log(data);
+
+  if (error) return <p>Hay Aksi bi hata oluştu yav</p>;
+
   const handleInputChange = (e) => {
-    setValue(e.target.value);
+    setInputValue(e.target.value);
   };
-
-  useEffect(() => {
-    const userFetchData = async () => {
-      if (!url) return; // URL boşsa veri çekme
-
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Network response was not ok");
-        const userData = await response.json();
-        setData(userData);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    userFetchData();
-  }, [url]); // URL değiştiğinde veri çek
-
-  console.log(inputValue);
-
+  const items = Array.isArray(data) ? data : [];
+  console.log(items);
   return (
     <>
       <div className="title">
@@ -58,7 +46,36 @@ function App() {
 
       <div className="container">
         <div className="row">
-          <div></div>
+          <div>
+            <ul>
+              {items && (
+                <div
+                  className="card"
+                  key={data.id}
+                  style={{
+                    width: "250px",
+                    height: "350px",
+                  }}
+                >
+                  <div className="card-body">
+                    <p className="card-text py-3">
+                      Şehir: <strong>{data.name || "Bilinmiyor"}</strong>
+                    </p>
+                    <p className="card-text py-3">
+                      Durum:
+                      <strong>
+                        {data.weather?.[0]?.description || "Bilinmiyor"}
+                      </strong>
+                    </p>
+                    <p className="card-text py-3">
+                      Açıklama:{" "}
+                      <strong>{data.sys?.country || "Bilinmiyor"}</strong>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </>
