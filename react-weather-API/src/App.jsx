@@ -16,8 +16,7 @@ function App() {
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
-  const items = Array.isArray(data) ? data : [];
-  console.log(items);
+  // const items = Array.isArray(data) ? data : [];
   return (
     <>
       <div className="title">
@@ -48,7 +47,7 @@ function App() {
         <div className="row">
           <div>
             <ul>
-              {items && (
+              {data && (
                 <div
                   className="card"
                   key={data.id}
@@ -68,7 +67,7 @@ function App() {
                       </strong>
                     </p>
                     <p className="card-text py-3">
-                      Açıklama:{" "}
+                      Açıklama
                       <strong>{data.sys?.country || "Bilinmiyor"}</strong>
                     </p>
                   </div>
