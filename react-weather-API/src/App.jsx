@@ -6,7 +6,7 @@ function App() {
   // const apiKey = `10dce54d3ebb7918252869cf5ca2da5c`;
 
   const { data, error } = fetchData(
-    `http://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=10dce54d3ebb7918252869cf5ca2da5c`
+    `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=10dce54d3ebb7918252869cf5ca2da5c`
   );
 
   console.log(data);
